@@ -458,7 +458,7 @@ function AdminDashboard({ onHome, theme, setTheme }: { onHome: () => void; theme
                       <code style={{ fontFamily: "DM Mono", color: "var(--teal)" }}>{a.passportNumber}</code>
                     </td>
                     <td>{a.category}</td>
-                    <td><small style={{ fontFamily: "DM Mono" }}>{a.id}</small>                    <td>
+                    <td><small style={{ fontFamily: "DM Mono" }}>{a.id}</small></td><td>
                       <select
                         className={`status ${a.status.toLowerCase()}`}
                         value={a.status}
@@ -484,7 +484,7 @@ function AdminDashboard({ onHome, theme, setTheme }: { onHome: () => void; theme
                         Delete
                       </button>
                     </td>
-                  </tr> </tr>
+                  </tr>
                 ))
               )}
             </tbody>

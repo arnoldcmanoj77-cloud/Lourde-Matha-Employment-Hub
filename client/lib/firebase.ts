@@ -12,6 +12,7 @@ import {
   orderBy,
   setDoc,
   serverTimestamp,
+  deleteDoc,
 } from "firebase/firestore";
 
 /**
@@ -146,6 +147,22 @@ export async function getApplicantFiles(): Promise<ApplicantFile[]> {
 /**
  * Subscribe to real-time updates for applicant files (Admin dashboard)
  */
+export async function deleteApplicant(fileId: string): Promise<boolean> {
+  if (isFirebaseConfigured() && db && fileId && !fileId.startsWith('LM-')) {
+    try {
+      const docRef = doc(db, COLLECTION_NAME, fileId);
+      await deleteDoc(docRef);
+    } catch (err) {
+      console.warn('Firestore delete error:', err);
+    }
+  }
+  // Update local cache
+  const local = getLocalApplicants();
+  const filtered = local.filter((a) => a.id !== fileId);
+  saveLocalApplicants(filtered);
+  return true;
+}
+
 export function subscribeToApplicantFiles(
   callback: (files: ApplicantFile[]) => void
 ): () => void {
