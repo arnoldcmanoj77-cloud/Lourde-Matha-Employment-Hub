@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lourde Matha Employment Hub | Israel Work Opportunities</title>
+    <meta name="description" content="Official Portal for Overseas Work Opportunities in Israel. Apply for Cleaning, Electrician, Heavy Drivers, Operators, Welders & More.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo-brand">
+                <img src="assets/logo.jpg" alt="Lourde Matha Employment Hub Logo" class="brand-logo-img">
+                <div class="brand-text">
+                    <span class="brand-name">LOURDE MATHA</span>
+                    <span class="brand-sub">EMPLOYMENT HUB • ISRAEL JOBS</span>
+                </div>
+            </a>
+
+            <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" class="nav-item active"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#categories" class="nav-item"><i class="fa-solid fa-briefcase"></i> Job Categories</a>
+                <a href="#contact" class="nav-item"><i class="fa-solid fa-headset"></i> Contact Us</a>
+                
+                <!-- Dynamic Auth Buttons -->
+                <div id="authNavButtons" class="auth-nav-group">
+                    <button class="btn btn-outline" id="loginNavBtn" onclick="app.showModal('loginModal')">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </button>
+                    <button class="btn btn-primary" id="registerNavBtn" onclick="app.showModal('registerModal')">
+                        <i class="fa-solid fa-user-plus"></i> Register & Apply
+                    </button>
+                </div>
+
+                <!-- User Profile Badge (When logged in) -->
+                <div id="userNavGroup" class="user-nav-group hidden">
+                    <span class="user-badge" id="navUserBadge">
+                        <i class="fa-solid fa-circle-user"></i> <span id="navUserName">Applicant</span>
+                    </span>
+                    <button class="btn btn-sm btn-ghost" onclick="app.logout()">
+                        <i class="fa-solid fa-power-off"></i> Logout
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container / Views -->
+    <main id="appContainer">
+
+        <!-- VIEW: Landing Page -->
+        <section id="view-home" class="page-view active">
+            <!-- Hero Banner -->
+            <div class="hero-section">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-flag-checkered"></i> Official Israel Work Recruitment Agency
+                    </div>
+                    <h1>Build Your Future in <span>Israel</span></h1>
+                    <p>Connecting skilled professionals and specialized workers with top government and private sector job opportunities across Israel.</p>
+                    
+                    <div class="hero-cta-group">
+                        <button class="btn btn-primary btn-lg" onclick="app.showModal('registerModal')">
+                            <i class="fa-solid fa-paper-plane"></i> Apply Now for Israel Jobs
+                        </button>
+                        <button class="btn btn-secondary btn-lg" onclick="app.scrollToSection('categories')">
+                            <i class="fa-solid fa-list-check"></i> Explore 9 Work Categories
+                        </button>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Verified Process</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">9+</span>
+                            <span class="stat-label">Job Categories</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Application Tracking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Categories Section -->
+            <section id="categories" class="section-padding">
+                <div class="section-header">
+                    <span class="sub-title">Urgent Openings</span>
+                    <h2>Featured Work Categories in Israel</h2>
+                    <p>Select your field of expertise during registration to apply directly</p>
+                </div>
+
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </section>
+
+            <!-- Process Steps -->
+            <section class="section-padding bg-alt">
+                <div class="section-header">
+                    <span class="sub-title">How It Works</span>
+                    <h2>Simple 4-Step Application Process</h2>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-num">01</div>
+                        <div class="step-icon"><i class="fa-solid fa-user-plus"></i></div>
+                        <h3>Create Profile</h3>
+                        <p>Register with your full name, phone number, and select your target job category.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">02</div>
+                        <div class="step-icon"><i class="fa-solid fa-passport"></i></div>
+                        <h3>Enter Passport Info</h3>
+                        <p>Provide your valid passport details and upload a clean copy of your passport.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">03</div>
+                        <div class="step-icon"><i class="fa-solid fa-file-arrow-up"></i></div>
+                        <h3>Upload CV / Resume</h3>
+                        <p>Upload your professional CV (PDF or DOC) showing your work experience.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">04</div>
+                        <div class="step-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <h3>Submit & Track</h3>
+                        <p>Click Apply to submit your complete file. Track your status live in your dashboard.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="section-padding">
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <h2>Lourde Matha Employment Hub</h2>
+                        <p>Your trusted recruitment partner for work opportunities in Israel. Get in touch with our helpdesk for any questions or support.</p>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <div>
+                                    <strong>Israel Office (Direct):</strong>
+                                    <p><a href="tel:+97255944315" class="link-teal">+972 55-944-3153</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <div>
+                                    <strong>India Office (Kerala):</strong>
+                                    <p><a href="tel:+916238438723" class="link-teal">+91 6238 438723</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <div>
+                                    <strong>WhatsApp — Israel:</strong>
+                                    <p><a href="https://wa.me/97255944315" target="_blank" class="link-teal">+972 55-944-3153 &nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <div>
+                                    <strong>WhatsApp — India:</strong>
+                                    <p><a href="https://wa.me/916238438723" target="_blank" class="link-teal">+91 6238 438723 &nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <strong>Office Address:</strong>
+                                    <p>Lourde Matha Employment Hub,<br>Chemperi, Kannur, Kerala — India</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-action">
+                        <div class="badge-gold"><i class="fa-solid fa-shield-halved"></i> Authorized Agency</div>
+                        <h3>Ready to Start Your Journey?</h3>
+                        <p>Submit your application file now and our agency team will review your CV within 24-48 hours.</p>
+                        <button class="btn btn-primary btn-block" onclick="app.showModal('registerModal')">
+                            <i class="fa-solid fa-user-plus"></i> Register & Submit CV
+                        </button>
+                        <button class="btn btn-outline btn-block" onclick="app.showModal('loginModal')">
+                            <i class="fa-solid fa-lock"></i> Existing User / Admin Login
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- VIEW: Applicant Dashboard (Logged-in Applicant) -->
+        <section id="view-applicant-dashboard" class="page-view container-padding">
+            <div class="dashboard-header">
+                <div>
+                    <span class="badge badge-teal"><i class="fa-solid fa-user"></i> Applicant Portal</span>
+                    <h1 id="applicantWelcome">Welcome, Applicant</h1>
+                    <p class="text-muted">Manage your profile, passport details, CV file, and track application status.</p>
+                </div>
+                <div class="dash-status-box" id="applicantStatusBox">
+                    <span class="status-label">Application Status:</span>
+                    <span class="status-pill status-pending" id="applicantStatusBadge"><i class="fa-solid fa-clock"></i> Draft File</span>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Application Form / File Details -->
+                <div class="card card-glass">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-id-card"></i> My Application File</h2>
+                        <span class="text-small text-gold"><i class="fa-solid fa-lock"></i> Private & Encrypted</span>
+                    </div>
+                    
+                    <form id="applicantFileForm" onsubmit="app.handleApplicantSubmit(event)">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="appFullName"><i class="fa-solid fa-user"></i> Full Name (as in Passport)</label>
+                                <input type="text" id="appFullName" class="form-control" placeholder="Enter full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="appPhone"><i class="fa-solid fa-phone"></i> Mobile / WhatsApp Number</label>
+                                <input type="tel" id="appPhone" class="form-control" placeholder="+91 XXXXX XXXXX" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="appJobCategory"><i class="fa-solid fa-briefcase"></i> Selected Job Category</label>
+                                <select id="appJobCategory" class="form-control" required>
+                                    <option value="">-- Select Job Category --</option>
+                                    <option value="CLEANING">CLEANING</option>
+                                    <option value="GENERAL WORKER">GENERAL WORKER</option>
+                                    <option value="ELECTRICIAN">ELECTRICIAN</option>
+                                    <option value="PLUMBER">PLUMBER</option>
+                                    <option value="WELDERS">WELDERS</option>
+                                    <option value="FORKLIFT OPERATORS">FORKLIFT OPERATORS</option>
+                                    <option value="HEAVY DRIVERS">HEAVY DRIVERS</option>
+                                    <option value="HEAVY MECHANICS">HEAVY MECHANICS</option>
+                                    <option value="HEAVY MACHINE OPERATORS">HEAVY MACHINE OPERATORS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="appPassportNum"><i class="fa-solid fa-passport"></i> Passport Number</label>
+                                <input type="text" id="appPassportNum" class="form-control" placeholder="e.g. Z1234567" required style="text-transform: uppercase;">
+                            </div>
+                        </div>
+
+                        <!-- Document Upload Section -->
+                        <div class="upload-section">
+                            <h3><i class="fa-solid fa-paperclip"></i> File Uploads</h3>
+                            
+                            <div class="form-row">
+                                <!-- CV File Upload -->
+                                <div class="form-group">
+                                    <label><i class="fa-solid fa-file-pdf"></i> Upload CV / Resume <span class="required">*</span></label>
+                                    <div class="dropzone" id="cvDropzone" onclick="document.getElementById('cvFileInput').click()">
+                                        <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+                                        <div class="dropzone-text">
+                                            <strong>Click to upload CV</strong>
+                                            <span>PDF, DOC, DOCX or Images (Max 5MB)</span>
+                                        </div>
+                                        <input type="file" id="cvFileInput" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display:none;" onchange="app.handleFileUpload(this, 'cv')">
+                                    </div>
+                                    <div id="cvFileStatus" class="file-preview-info hidden"></div>
+                                </div>
+
+                                <!-- Passport Copy Upload -->
+                                <div class="form-group">
+                                    <label><i class="fa-solid fa-passport"></i> Upload Passport Copy</label>
+                                    <div class="dropzone" id="passportDropzone" onclick="document.getElementById('passportFileInput').click()">
+                                        <i class="fa-solid fa-id-card dropzone-icon"></i>
+                                        <div class="dropzone-text">
+                                            <strong>Click to upload Passport Copy</strong>
+                                            <span>PDF or Image scan of Passport</span>
+                                        </div>
+                                        <input type="file" id="passportFileInput" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" onchange="app.handleFileUpload(this, 'passport')">
+                                    </div>
+                                    <div id="passportFileStatus" class="file-preview-info hidden"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-footer">
+                            <div class="notice-box">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>Double check all details. Your file will be saved and submitted to the Admin portal.</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg" id="submitAppBtn">
+                                <i class="fa-solid fa-paper-plane"></i> Apply & Save My File
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right Sidebar: Application Overview -->
+                <div class="card card-sidebar">
+                    <h3><i class="fa-solid fa-file-invoice"></i> File Status Summary</h3>
+                    
+                    <div class="summary-list">
+                        <div class="summary-item">
+                            <span class="lbl">Applicant Name:</span>
+                            <span class="val" id="sumName">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="lbl">Job Category:</span>
+                            <span class="val" id="sumCategory">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="lbl">Passport Number:</span>
+                            <span class="val" id="sumPassport">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="lbl">CV Uploaded:</span>
+                            <span class="val" id="sumCV"><span class="badge-red"><i class="fa-solid fa-xmark"></i> Missing</span></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="lbl">Passport Doc Uploaded:</span>
+                            <span class="val" id="sumPassDoc"><span class="badge-red"><i class="fa-solid fa-xmark"></i> Missing</span></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="lbl">Last Updated:</span>
+                            <span class="val" id="sumUpdated">-</span>
+                        </div>
+                    </div>
+
+                    <div class="admin-note-box hidden" id="applicantAdminNotes">
+                        <h4><i class="fa-solid fa-comment-dots"></i> Message from Agency Admin:</h4>
+                        <p id="adminNoteText" class="text-note">No notes yet.</p>
+                    </div>
+
+                    <div class="file-action-buttons" id="applicantFileActions">
+                        <!-- Dynamic download links -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: Admin Dashboard (Logged-in Admin) -->
+        <section id="view-admin-dashboard" class="page-view container-padding">
+            <div class="dashboard-header">
+                <div>
+                    <span class="badge badge-gold"><i class="fa-solid fa-shield-halved"></i> Agency Administration</span>
+                    <h1>Israel Work Files - Admin Control Center</h1>
+                    <p class="text-muted">View, search, filter, and download all applicant files and CV submissions.</p>
+                </div>
+                <div class="admin-header-actions">
+                    <button class="btn btn-outline" onclick="app.exportDataJSON()">
+                        <i class="fa-solid fa-download"></i> Export Data Backup
+                    </button>
+                    <button class="btn btn-secondary" onclick="app.seedSampleData()">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Add Sample Demo Files
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="admin-stats-grid">
+                <div class="admin-stat-card">
+                    <div class="stat-icon icon-blue"><i class="fa-solid fa-folder-open"></i></div>
+                    <div>
+                        <h3 id="statTotalApps">0</h3>
+                        <span>Total Applicant Files</span>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon icon-yellow"><i class="fa-solid fa-clock"></i></div>
+                    <div>
+                        <h3 id="statPendingApps">0</h3>
+                        <span>Pending Review</span>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon icon-green"><i class="fa-solid fa-circle-check"></i></div>
+                    <div>
+                        <h3 id="statApprovedApps">0</h3>
+                        <span>Approved / Shortlisted</span>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon icon-teal"><i class="fa-solid fa-briefcase"></i></div>
+                    <div>
+                        <h3 id="statCategoriesCount">9</h3>
+                        <span>Job Categories</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters & Search Bar -->
+            <div class="card filter-bar">
+                <div class="search-input-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="adminSearchInput" placeholder="Search applicant by name, passport number, or phone..." oninput="app.renderAdminTable()">
+                </div>
+
+                <div class="filter-group">
+                    <select id="adminCategoryFilter" onchange="app.renderAdminTable()">
+                        <option value="ALL">All Categories (9)</option>
+                        <option value="CLEANING">CLEANING</option>
+                        <option value="GENERAL WORKER">GENERAL WORKER</option>
+                        <option value="ELECTRICIAN">ELECTRICIAN</option>
+                        <option value="PLUMBER">PLUMBER</option>
+                        <option value="WELDERS">WELDERS</option>
+                        <option value="FORKLIFT OPERATORS">FORKLIFT OPERATORS</option>
+                        <option value="HEAVY DRIVERS">HEAVY DRIVERS</option>
+                        <option value="HEAVY MECHANICS">HEAVY MECHANICS</option>
+                        <option value="HEAVY MACHINE OPERATORS">HEAVY MACHINE OPERATORS</option>
+                    </select>
+
+                    <select id="adminStatusFilter" onchange="app.renderAdminTable()">
+                        <option value="ALL">All Statuses</option>
+                        <option value="Submitted">Submitted / Pending</option>
+                        <option value="Shortlisted">Shortlisted</option>
+                        <option value="Approved">Approved for Israel</option>
+                        <option value="Draft">Draft (Incomplete)</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Applicants Files Table -->
+            <div class="card card-table">
+                <div class="table-responsive">
+                    <table class="data-table" id="adminApplicantsTable">
+                        <thead>
+                            <tr>
+                                <th># File ID</th>
+                                <th>Applicant Name</th>
+                                <th>Category</th>
+                                <th>Passport Number</th>
+                                <th>Contact Phone</th>
+                                <th>Files Attached</th>
+                                <th>Status</th>
+                                <th>Date Submitted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="noDataMessage" class="empty-state hidden">
+                    <i class="fa-regular fa-folder-open"></i>
+                    <h3>No applicant files found</h3>
+                    <p>No applications match your search filters or no files uploaded yet.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="assets/logo.jpg" alt="Lourde Matha Logo" class="footer-logo">
+                <div>
+                    <h4>Lourde Matha Employment Hub</h4>
+                    <p>Government Recognized Israel Overseas Employment Agency</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <span><i class="fa-solid fa-shield"></i> Admin Login: <code>augnal</code> / <code>augnal@2006</code></span>
+                <span>© 2026 Lourde Matha Employment Hub. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: Login Modal (Admin & Applicants) -->
+    <div class="modal" id="loginModal">
+        <div class="modal-backdrop" onclick="app.hideModal('loginModal')"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="app.hideModal('loginModal')">&times;</button>
+
+            <div class="modal-header text-center">
+                <img src="assets/logo.jpg" alt="Logo" class="modal-logo">
+                <h2>Welcome Back</h2>
+                <p>Login to your Applicant Account or Agency Admin Portal</p>
+            </div>
+
+            <!-- Login Type Tabs -->
+            <div class="tab-group">
+                <button class="tab-btn active" id="tabApplicant" onclick="app.switchLoginTab('applicant')">
+                    <i class="fa-solid fa-user"></i> Applicant Login
+                </button>
+                <button class="tab-btn" id="tabAdmin" onclick="app.switchLoginTab('admin')">
+                    <i class="fa-solid fa-user-shield"></i> Admin Login
+                </button>
+            </div>
+
+            <form id="loginForm" onsubmit="app.handleLoginSubmit(event)">
+                <input type="hidden" id="loginType" value="applicant">
+
+                <div class="form-group">
+                    <label id="loginUserLabel" for="loginUsername"><i class="fa-solid fa-user"></i> Applicant Name or Phone Number</label>
+                    <input type="text" id="loginUsername" class="form-control" placeholder="Enter your registered name or phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fa-solid fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required>
+                </div>
+
+                <div id="loginAlert" class="alert alert-danger hidden"></div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login Now
+                </button>
+            </form>
+
+            <div class="modal-footer text-center">
+                <p>New Applicant? <a href="#" onclick="app.hideModal('loginModal'); app.showModal('registerModal'); return false;" class="link-teal">Create a new profile & apply</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Registration Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-backdrop" onclick="app.hideModal('registerModal')"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="app.hideModal('registerModal')">&times;</button>
+
+            <div class="modal-header text-center">
+                <img src="assets/logo.jpg" alt="Logo" class="modal-logo">
+                <h2>Applicant Registration</h2>
+                <p>Create your profile to apply for Israel Job Vacancies</p>
+            </div>
+
+            <form id="registerForm" onsubmit="app.handleRegisterSubmit(event)">
+                <div class="form-group">
+                    <label for="regFullName"><i class="fa-solid fa-user"></i> Full Name (as per Passport)</label>
+                    <input type="text" id="regFullName" class="form-control" placeholder="e.g. John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPhone"><i class="fa-solid fa-phone"></i> Mobile Number (WhatsApp)</label>
+                    <input type="tel" id="regPhone" class="form-control" placeholder="e.g. +91 98765 43210" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="regCategory"><i class="fa-solid fa-briefcase"></i> Job Category You Are Applying For</label>
+                    <select id="regCategory" class="form-control" required>
+                        <option value="">-- Choose Work Category --</option>
+                        <option value="CLEANING">CLEANING</option>
+                        <option value="GENERAL WORKER">GENERAL WORKER</option>
+                        <option value="ELECTRICIAN">ELECTRICIAN</option>
+                        <option value="PLUMBER">PLUMBER</option>
+                        <option value="WELDERS">WELDERS</option>
+                        <option value="FORKLIFT OPERATORS">FORKLIFT OPERATORS</option>
+                        <option value="HEAVY DRIVERS">HEAVY DRIVERS</option>
+                        <option value="HEAVY MECHANICS">HEAVY MECHANICS</option>
+                        <option value="HEAVY MACHINE OPERATORS">HEAVY MACHINE OPERATORS</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassport"><i class="fa-solid fa-passport"></i> Passport Number</label>
+                    <input type="text" id="regPassport" class="form-control" placeholder="e.g. N1234567" required style="text-transform: uppercase;">
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword"><i class="fa-solid fa-key"></i> Set Account Password</label>
+                    <input type="password" id="regPassword" class="form-control" placeholder="Create a password for login" required>
+                </div>
+
+                <div id="registerAlert" class="alert alert-danger hidden"></div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg">
+                    <i class="fa-solid fa-user-check"></i> Register Profile & Proceed to Upload CV
+                </button>
+            </form>
+
+            <div class="modal-footer text-center">
+                <p>Already registered? <a href="#" onclick="app.hideModal('registerModal'); app.showModal('loginModal'); return false;" class="link-teal">Login to existing file</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Admin View Applicant File Modal -->
+    <div class="modal" id="adminViewFileModal">
+        <div class="modal-backdrop" onclick="app.hideModal('adminViewFileModal')"></div>
+        <div class="modal-content modal-lg">
+            <button class="modal-close" onclick="app.hideModal('adminViewFileModal')">&times;</button>
+
+            <div class="modal-header">
+                <span class="badge badge-gold"><i class="fa-solid fa-file-user"></i> Applicant File Details</span>
+                <h2 id="modalApplicantName">Applicant File Details</h2>
+                <p id="modalApplicantId" class="text-muted">File ID: #</p>
+            </div>
+
+            <div class="modal-body-grid">
+                <div class="details-column">
+                    <div class="detail-group">
+                        <span class="detail-label">Full Name:</span>
+                        <strong id="modalDetailName" class="detail-val">-</strong>
+                    </div>
+                    <div class="detail-group">
+                        <span class="detail-label">Job Category:</span>
+                        <span id="modalDetailCategory" class="badge badge-teal">-</span>
+                    </div>
+                    <div class="detail-group">
+                        <span class="detail-label">Passport Number:</span>
+                        <strong id="modalDetailPassport" class="detail-val text-gold">-</strong>
+                    </div>
+                    <div class="detail-group">
+                        <span class="detail-label">Phone Contact:</span>
+                        <span id="modalDetailPhone" class="detail-val">-</span>
+                    </div>
+                    <div class="detail-group">
+                        <span class="detail-label">Application Date:</span>
+                        <span id="modalDetailDate" class="detail-val">-</span>
+                    </div>
+                </div>
+
+                <div class="files-column card-glass">
+                    <h3><i class="fa-solid fa-folder-open"></i> Attached Files & CV</h3>
+                    <div class="file-download-item" id="modalCVContainer">
+                        <i class="fa-solid fa-file-pdf icon-pdf"></i>
+                        <div style="flex:1;">
+                            <strong>Curriculum Vitae (CV)</strong>
+                            <span id="modalCVName">No file uploaded</span>
+                        </div>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                            <button id="modalDownloadCVBtn" class="btn btn-sm btn-primary" disabled>
+                                <i class="fa-solid fa-download"></i> Download
+                            </button>
+                            <button id="modalDeleteCVBtn" class="btn btn-sm btn-danger" disabled title="Remove CV from this file">
+                                <i class="fa-solid fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="file-download-item" id="modalPassportContainer">
+                        <i class="fa-solid fa-passport icon-pass"></i>
+                        <div style="flex:1;">
+                            <strong>Passport Scan Copy</strong>
+                            <span id="modalPassportName">No scan uploaded</span>
+                        </div>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                            <button id="modalDownloadPassportBtn" class="btn btn-sm btn-outline" disabled>
+                                <i class="fa-solid fa-download"></i> Download
+                            </button>
+                            <button id="modalDeletePassportBtn" class="btn btn-sm btn-danger" disabled title="Remove Passport Scan from this file">
+                                <i class="fa-solid fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Status Update & Notes -->
+            <div class="admin-action-section">
+                <h3><i class="fa-solid fa-sliders"></i> Admin Decision & File Notes</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="adminUpdateStatus"><i class="fa-solid fa-pen-to-square"></i> Change Application Status</label>
+                        <select id="adminUpdateStatus" class="form-control">
+                            <option value="Submitted">Submitted (Pending Review)</option>
+                            <option value="Shortlisted">Shortlisted for Interview</option>
+                            <option value="Approved">Approved for Israel Departure</option>
+                            <option value="Rejected">Rejected / Ineligible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminNotesInput"><i class="fa-solid fa-sticky-note"></i> Admin Notes for Applicant</label>
+                        <input type="text" id="adminNotesInput" class="form-control" placeholder="e.g., Medical test required before visa processing">
+                    </div>
+                </div>
+
+                <div class="admin-modal-footer">
+                    <button class="btn btn-danger btn-sm" onclick="app.deleteApplicantFile()">
+                        <i class="fa-solid fa-trash"></i> Delete Applicant File
+                    </button>
+                    <button class="btn btn-primary" onclick="app.saveAdminDecision()">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Decision & Update Applicant
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">
+        <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+        <span id="toastMessage">Notification message</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
