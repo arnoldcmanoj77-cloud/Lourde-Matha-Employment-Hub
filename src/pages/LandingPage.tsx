@@ -4,11 +4,10 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import {
   CheckCircle2, UserPlus, FileText, Upload, CheckCircle,
-  Phone, MapPin, Shield, User, AlertTriangle,
+  Phone, MapPin, Shield, User,
   Brush, HardHat, Zap, Wrench, Flame, Forklift,
   Truck, Settings, Construction,
 } from 'lucide-react';
-import { isSupabaseConfigured } from '@/lib/supabase';
 import heroImg from '@/assets/hero.png';
 
 const CATEGORIES = [
@@ -26,17 +25,7 @@ const CATEGORIES = [
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-slate-900">
-      {/* Supabase Setup Banner */}
-      {!isSupabaseConfigured && (
-        <div className="bg-amber-500 text-amber-950 px-4 py-3 flex items-center justify-center gap-3 text-sm font-medium">
-          <AlertTriangle className="w-4 h-4 shrink-0" />
-          <span>
-            <strong>Setup Required:</strong> Add your Supabase URL and anon key to{' '}
-            <code className="bg-amber-400 px-1.5 py-0.5 rounded font-mono text-xs">.env</code>{' '}
-            then restart the dev server.
-          </span>
-        </div>
-      )}
+      
 
       {/* Hero Section */}
       <section className="relative w-full py-20 md:py-28 overflow-hidden bg-slate-900 text-white">
