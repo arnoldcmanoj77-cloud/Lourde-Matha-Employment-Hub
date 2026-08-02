@@ -7,8 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { FileText, Upload, CheckCircle2, AlertCircle, Trash2 } from 'lucide-react';
-
+import { FileText, Upload, CheckCircle2, AlertCircle } from 'lucide-react';
 export default function ApplicantDashboard() {
   const [profile, setProfile] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
