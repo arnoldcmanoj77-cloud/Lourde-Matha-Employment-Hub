@@ -472,9 +472,15 @@ function AdminDashboard({ onHome, theme, setTheme }: { onHome: () => void; theme
                       </select>
                     </td>
                     <td>
-                      <button className="view-button">
-                        <FileText size={14} /> View {a.cvFileName || "file.pdf"}
-                      </button>
+                        <button className="view-button" onClick={() => {
+                          if (a.cvUrl) {
+                            window.open(a.cvUrl, "_blank");
+                          } else {
+                            alert("Resume not available");
+                          }
+                        }}>
+                          <FileText size={14} /> View {a.cvFileName || "file.pdf"}
+                        </button>
                       <button className="delete-button" style={{ marginLeft: "8px", background: "var(--danger)", color: "white" }} onClick={ async () => {
                         if (window.confirm("Are you sure you want to delete this application?")) {
                           await deleteApplicant(a.id!);
