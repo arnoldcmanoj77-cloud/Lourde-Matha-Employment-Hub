@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "builds": [
+        {
+            "src": "client/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "dist/spa"
+            }
+        },
+        {
+            "src": "server/index.ts",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/server/$1.js"
+        },
+        // All other routes fall back to the SPA entry point
+        {
+            "src": "/(.*)",
+            "dest": "/dist/spa/$1.html"
+        }
+    ]
+}
