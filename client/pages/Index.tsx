@@ -26,6 +26,7 @@ import {
   saveApplicantProfile,
   subscribeToApplicantFiles,
   updateApplicantStatus,
+  deleteApplicant,
 } from "../lib/firebase";
 
 const logo = "/logo.svg";
@@ -93,6 +94,8 @@ function AuthModal({
   const [passportNumber, setPassportNumber] = useState("");
   const [phone, setPhone] = useState("");
   const [category, setCategory] = useState("");
+  const [adminUsername, setAdminUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -111,6 +114,14 @@ function AuthModal({
         onSuccess("dashboard", newProfile);
       } else {
         if (role === "admin") {
+          // Simple admin credential guard (dev only)
+          const ADMIN_USER = "augnal";
+          const ADMIN_PASS = "augnal@2006";
+          if (adminUsername !== ADMIN_USER || password !== ADMIN_PASS) {
+            alert("❌ Invalid admin credentials");
+            setLoading(false);
+            return;
+          }
           onSuccess("admin");
         } else {
           const found = await getApplicantByPassport(passportNumber);
@@ -160,13 +171,13 @@ function AuthModal({
           {type === "login" && (
             <>
               {role === "admin" ? (
-                <label>Admin username<input required placeholder="Enter admin username" /></label>
+                <label>Admin username<input required placeholder="Enter admin username" value={adminUsername} onChange={(e) => setAdminUsername(e.target.value)} /></label>
               ) : (
                 <label>Passport number<input required value={passportNumber} onChange={(e) => setPassportNumber(e.target.value)} placeholder="Enter registered passport number" /></label>
               )}
             </>
           )}
-          <label>Password<input required type="password" placeholder={type === "register" ? "Create a password" : "Enter your password"} /></label>
+          <label>Password<input required type="password" placeholder={type === "register" ? "Create a password" : "Enter your password"} value={password} onChange={(e) => setPassword(e.target.value)} /></label>
           <button className="button primary full" type="submit" disabled={loading}>
             {loading ? "Processing..." : type === "register" ? "Create profile & save to DB" : "Sign in to portal"}
             <ArrowRight size={17} />
@@ -447,12 +458,11 @@ function AdminDashboard({ onHome, theme, setTheme }: { onHome: () => void; theme
                       <code style={{ fontFamily: "DM Mono", color: "var(--teal)" }}>{a.passportNumber}</code>
                     </td>
                     <td>{a.category}</td>
-                    <td><small style={{ fontFamily: "DM Mono" }}>{a.id}</small></td>
-                    <td>
+                    <td><small style={{ fontFamily: "DM Mono" }}>{a.id}</small>                    <td>
                       <select
                         className={`status ${a.status.toLowerCase()}`}
                         value={a.status}
-                        onChange={(e) => handleStatusChange(a.id!, e.target.value as ApplicantFile["status"])}
+                        onChange={(e) => handleStatusChange(a.id!, e.target.value as ApplicantFile["status"]) }
                         style={{ border: "none", outline: "none", cursor: "pointer", borderRadius: "6px", padding: "4px 8px" }}
                       >
                         <option value="Draft">Draft</option>
@@ -465,8 +475,16 @@ function AdminDashboard({ onHome, theme, setTheme }: { onHome: () => void; theme
                       <button className="view-button">
                         <FileText size={14} /> View {a.cvFileName || "file.pdf"}
                       </button>
+                      <button className="delete-button" style={{ marginLeft: "8px", background: "var(--danger)", color: "white" }} onClick={ async () => {
+                        if (window.confirm("Are you sure you want to delete this application?")) {
+                          await deleteApplicant(a.id!);
+                          setApplicants(prev => prev.filter(item => item.id !== a.id));
+                        }
+                      } }>
+                        Delete
+                      </button>
                     </td>
-                  </tr>
+                  </tr> </tr>
                 ))
               )}
             </tbody>
