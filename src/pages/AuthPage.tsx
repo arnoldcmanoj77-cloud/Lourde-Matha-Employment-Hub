@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowLeft } from 'lucide-react';
 
 const CATEGORIES = [
   'CLEANING',
@@ -102,31 +103,45 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center py-16 px-4 bg-slate-50 min-h-screen">
-      <Card className="w-full max-w-md shadow-2xl border-slate-200">
-        <CardHeader className="text-center pb-4">
-          <div className="w-16 h-16 bg-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white text-2xl font-extrabold shadow-lg shadow-teal-200">
+    <div className="min-h-screen bg-slate-900 text-white flex flex-col justify-center items-center relative overflow-hidden py-16 px-4">
+      {/* Background Glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-teal-900/20 rounded-full blur-3xl pointer-events-none -z-10" />
+
+      {/* Back to Home Button */}
+      <Link
+        to="/"
+        className="absolute top-6 left-6 text-sm text-slate-400 hover:text-teal-400 flex items-center transition-colors font-medium"
+      >
+        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
+      </Link>
+
+      <Card className="w-full max-w-md bg-slate-900/90 backdrop-blur-xl border border-slate-800 shadow-2xl shadow-teal-950/40 rounded-3xl overflow-hidden">
+        <CardHeader className="text-center pb-4 pt-8">
+          {/* Logo Badge */}
+          <div className="w-14 h-14 bg-teal-950/80 border border-teal-500/30 text-teal-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl font-black shadow-lg shadow-teal-900/30">
             LM
           </div>
-          <CardTitle className="text-2xl font-bold text-slate-900">
+
+          <CardTitle className="text-2xl font-extrabold text-white tracking-tight">
             {activeTab === 'login' ? 'Welcome Back' : 'Create Your Profile'}
           </CardTitle>
-          <CardDescription className="text-slate-500">
+          <CardDescription className="text-slate-400 text-sm mt-1">
             {activeTab === 'login'
               ? 'Log in to track your application status'
-              : 'Apply for Israel work opportunities'}
+              : 'Apply for official Israel work opportunities'}
           </CardDescription>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="px-6 pb-8">
           {/* Tab Switcher */}
-          <div className="flex mb-6 bg-slate-100 p-1 rounded-xl gap-1">
+          <div className="flex mb-6 bg-slate-950/60 p-1.5 rounded-2xl border border-slate-800 gap-1">
             <button
               type="button"
-              className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 ${
+              className={`flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${
                 activeTab === 'login'
-                  ? 'bg-white shadow text-slate-900'
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-teal-600 text-white shadow-lg shadow-teal-900/40'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
               onClick={() => setActiveTab('login')}
             >
@@ -134,10 +149,10 @@ export default function AuthPage() {
             </button>
             <button
               type="button"
-              className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 ${
+              className={`flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${
                 activeTab === 'register'
-                  ? 'bg-white shadow text-slate-900'
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-teal-600 text-white shadow-lg shadow-teal-900/40'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
               onClick={() => setActiveTab('register')}
             >
@@ -149,7 +164,9 @@ export default function AuthPage() {
           {activeTab === 'login' && (
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="login-email">Email Address</Label>
+                <Label htmlFor="login-email" className="text-slate-300 text-xs font-semibold uppercase tracking-wider">
+                  Email Address
+                </Label>
                 <Input
                   id="login-email"
                   type="email"
@@ -158,10 +175,14 @@ export default function AuthPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   autoComplete="email"
+                  className="bg-slate-800/80 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-teal-500 focus-visible:border-teal-500 h-11 rounded-xl"
                 />
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="login-password">Password</Label>
+                <Label htmlFor="login-password" className="text-slate-300 text-xs font-semibold uppercase tracking-wider">
+                  Password
+                </Label>
                 <Input
                   id="login-password"
                   type="password"
@@ -170,20 +191,23 @@ export default function AuthPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   autoComplete="current-password"
+                  className="bg-slate-800/80 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-teal-500 focus-visible:border-teal-500 h-11 rounded-xl"
                 />
               </div>
+
               <Button
                 type="submit"
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white h-11 font-semibold"
+                className="w-full bg-teal-600 hover:bg-teal-500 text-white h-12 text-base font-semibold shadow-lg shadow-teal-900/30 transition-all duration-300 rounded-xl mt-2"
                 disabled={isLoading}
               >
                 {isLoading ? 'Signing in...' : 'Sign In'}
               </Button>
-              <p className="text-center text-sm text-slate-500">
+
+              <p className="text-center text-sm text-slate-400 pt-2">
                 Don't have an account?{' '}
                 <button
                   type="button"
-                  className="text-teal-600 font-semibold hover:underline"
+                  className="text-teal-400 font-semibold hover:text-teal-300 hover:underline transition-colors"
                   onClick={() => setActiveTab('register')}
                 >
                   Register here
@@ -196,42 +220,55 @@ export default function AuthPage() {
           {activeTab === 'register' && (
             <form onSubmit={handleRegister} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="reg-name">Full Name <span className="text-red-500">*</span></Label>
+                <Label htmlFor="reg-name" className="text-slate-300 text-xs font-semibold uppercase tracking-wider">
+                  Full Name <span className="text-teal-400">*</span>
+                </Label>
                 <Input
                   id="reg-name"
                   placeholder="As it appears on your Passport"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
+                  className="bg-slate-800/80 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-teal-500 focus-visible:border-teal-500 h-11 rounded-xl"
                 />
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="reg-phone">Phone Number <span className="text-red-500">*</span></Label>
+                <Label htmlFor="reg-phone" className="text-slate-300 text-xs font-semibold uppercase tracking-wider">
+                  Phone Number <span className="text-teal-400">*</span>
+                </Label>
                 <Input
                   id="reg-phone"
                   placeholder="+91 9876543210"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
+                  className="bg-slate-800/80 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-teal-500 focus-visible:border-teal-500 h-11 rounded-xl"
                 />
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="reg-category">Job Category in Israel <span className="text-red-500">*</span></Label>
+                <Label htmlFor="reg-category" className="text-slate-300 text-xs font-semibold uppercase tracking-wider">
+                  Job Category in Israel <span className="text-teal-400">*</span>
+                </Label>
                 <Select value={category} onValueChange={setCategory} required>
-                  <SelectTrigger id="reg-category">
+                  <SelectTrigger id="reg-category" className="bg-slate-800/80 border-slate-700 text-white focus:ring-teal-500 focus:border-teal-500 h-11 rounded-xl">
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-slate-800 border-slate-700 text-white">
                     {CATEGORIES.map((cat) => (
-                      <SelectItem key={cat} value={cat}>
+                      <SelectItem key={cat} value={cat} className="focus:bg-teal-900/50 focus:text-white">
                         {cat}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="reg-email">Email Address <span className="text-red-500">*</span></Label>
+                <Label htmlFor="reg-email" className="text-slate-300 text-xs font-semibold uppercase tracking-wider">
+                  Email Address <span className="text-teal-400">*</span>
+                </Label>
                 <Input
                   id="reg-email"
                   type="email"
@@ -240,10 +277,14 @@ export default function AuthPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   autoComplete="email"
+                  className="bg-slate-800/80 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-teal-500 focus-visible:border-teal-500 h-11 rounded-xl"
                 />
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="reg-password">Password <span className="text-red-500">*</span></Label>
+                <Label htmlFor="reg-password" className="text-slate-300 text-xs font-semibold uppercase tracking-wider">
+                  Password <span className="text-teal-400">*</span>
+                </Label>
                 <Input
                   id="reg-password"
                   type="password"
@@ -253,20 +294,23 @@ export default function AuthPage() {
                   required
                   minLength={6}
                   autoComplete="new-password"
+                  className="bg-slate-800/80 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-teal-500 focus-visible:border-teal-500 h-11 rounded-xl"
                 />
               </div>
+
               <Button
                 type="submit"
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white h-11 font-semibold"
+                className="w-full bg-teal-600 hover:bg-teal-500 text-white h-12 text-base font-semibold shadow-lg shadow-teal-900/30 transition-all duration-300 rounded-xl mt-2"
                 disabled={isLoading}
               >
                 {isLoading ? 'Creating Profile...' : 'Create Profile & Apply'}
               </Button>
-              <p className="text-center text-sm text-slate-500">
+
+              <p className="text-center text-sm text-slate-400 pt-2">
                 Already registered?{' '}
                 <button
                   type="button"
-                  className="text-teal-600 font-semibold hover:underline"
+                  className="text-teal-400 font-semibold hover:text-teal-300 hover:underline transition-colors"
                   onClick={() => setActiveTab('login')}
                 >
                   Login here
