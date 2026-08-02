@@ -38,7 +38,7 @@ export interface ApplicantFile {
   category: string;
   cvUrl?: string;
   cvFileName?: string;
-  status: "Draft" | "Submitted" | "Shortlisted" | "Approved";
+  status: "Draft" | "Submitted" | "Shortlisted" | "Approved" | "Rejected";
   createdAt: string;
   updatedAt?: string;
 }

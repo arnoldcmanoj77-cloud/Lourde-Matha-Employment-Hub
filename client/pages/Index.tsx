@@ -208,6 +208,7 @@ function ApplicantDashboard({
   const [category, setCategory] = useState(currentApplicant?.category || "General Worker");
   const [uploaded, setUploaded] = useState(!!currentApplicant?.cvFileName || currentApplicant?.status === "Submitted");
   const [fileName, setFileName] = useState(currentApplicant?.cvFileName || "");
+  const [cvUrl, setCvUrl] = useState(currentApplicant?.cvUrl || "");
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -232,6 +233,7 @@ function ApplicantDashboard({
         phone: phone || "+91 6238 438723",
         category,
         cvFileName: fileName || "resume.pdf",
+        cvUrl: cvUrl || undefined,
         status: "Submitted",
       });
       setCurrentApplicant(updated);
@@ -289,6 +291,7 @@ function ApplicantDashboard({
               <label>Mobile / WhatsApp<input required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91 6238 438723" /></label>
               <label>Applying for category<select required value={category} onChange={(e) => setCategory(e.target.value)}>{categories.map(([name]) => <option key={name} value={name}>{name}</option>)}</select></label>
             </div>
+            <label>Resume URL (optional)<input type="url" placeholder="https://example.com/resume.pdf" value={cvUrl} onChange={(e) => setCvUrl(e.target.value)} style={{ width: "100%", marginTop: "4px" }} /></label>
             <label className="upload-box" style={{ cursor: "pointer" }}>
               <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileUpload} style={{ display: "none" }} />
               <Upload size={26} />
